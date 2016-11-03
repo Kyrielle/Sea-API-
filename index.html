@@ -6,6 +6,11 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
         <link href="css/css_default.css" rel="stylesheet"/>
+        <script
+                src="https://code.jquery.com/jquery-3.1.1.min.js"
+                integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+                crossorigin="anonymous"></script>
+
     </head>
     <body>
         <header>
@@ -40,9 +45,9 @@
                         </ul>
                         <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input id="search" type="text" class="form-control" placeholder="Search">
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button id="submit" type="submit" class="btn btn-default">Submit</button>
                         </form>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Link</a></li>
@@ -50,6 +55,9 @@
                     </div>
                 </div>
             </nav>
+            <div id="carte">
+
+            </div>
 
 
         </header>
@@ -61,15 +69,41 @@
                 var map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -34.397, lng: 150.644},
                     scrollwheel: false,
-                    zoom: 8
+                    zoom: 5
                 });
+                var myParser = new geoXML3.parser({map: map});
+                myParser.parse('kml/Navigate.kml');
+
             }
 
         </script>
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: 'http://api.planetos.com/v1/datasets/myocean_sst_europe_daily/point?origin=dataset-details&lat=34.07739851150994&apikey=9ddcb9d01fac437e82ebf0fc495c9995&lon=26.591828131876077',
+                    dataType: 'json',
+                    type: 'get',
+                    success: function(data) {
+                        console.log('success');
+                        console.log(data);
 
 
+                    },
+                    error: function() {
+                        console.log('error');
+
+                    }
+
+                });
+            });
+        </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzEUUqBcI5fbNQNF18gIRY-BpE_kOfxT0 &callback=initMap"
                 async defer></script>
+        <script src="js/geoxml3.js"></script>
+        <script src="js/marker.js"></script>
+        <script src="js/geoxml3_gxParse_kmz.js"></script>
+        <script src="js/ZipFile.complete.js" ></script>
+
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </body>
 </html>
