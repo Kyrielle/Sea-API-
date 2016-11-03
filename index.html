@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Sea-Map</title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link href="css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="css/css_default.css" rel="stylesheet"/>
-        <script
-                src="https://code.jquery.com/jquery-3.1.1.min.js"
-                integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-                crossorigin="anonymous"></script>
+        <title>Geo XML - Test</title>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="viewport" content="width=device-width" />
+        <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+
+
+        <!-- Bootstrap core CSS     -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+
+
+        <!--  Light Bootstrap Table core CSS    -->
+        <link href="assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+
+        <!--     Fonts and icons     -->
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+        <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+        <style>
+            #map{
+                position:relative;
+                width:100%;
+                height: 50%;
+            }
+        </style>
 
     </head>
     <body>
-        <header>
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">Brand</a>
-                    </div>
+
 
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
@@ -52,29 +58,79 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#">Link</a></li>
                         </ul>
+
+        <div class="wrapper">
+            <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+
+                <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
+
+
+                <div class="sidebar-wrapper">
+                    <div class="logo">
+                        <a href="#" class="simple-text">
+                            Les Rebeux du Désert (LRD)
+                        </a>
+
                     </div>
+
+                    <ul class="nav">
+                        <li class="active">
+                            <a href="index.html">
+                                <i class="pe-7s-map-marker"></i>
+                                <p>Maps</p>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-            <div id="carte">
+
 
             </div>
 
+            <div class="main-panel">
+                <nav class="navbar navbar-default navbar-fixed">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Maps</a>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav navbar-left">
 
-        </header>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <div id="map"></div>
+
+            </div>
+    </div>
         <div id="map"></div>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAulYqR-VJG7zbEFHQ2T8oukQoFhm0RIE&callback=initMap"></script>
+        <script src="js/geoxml3.js"></script>
+        <script src="js/geoxml3_gxParse_kmz.js"></script>
+        <script src="js/ZipFile.complete.js"></script>
+        <script type="text/javascript">
 
-        <script>
+            var map;
             function initMap() {
-
-                var map = new google.maps.Map(document.getElementById('map'), {
+                map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: -34.397, lng: 150.644},
+
                     scrollwheel: false,
                     zoom: 5
                 });
                 var myParser = new geoXML3.parser({map: map});
                 myParser.parse('kml/Navigate.kml');
-
-            }
+      }
 
         </script>
         <script>
@@ -92,6 +148,7 @@
                     error: function() {
                         console.log('error');
 
+
                     }
 
                 });
@@ -105,5 +162,6 @@
         <script src="js/ZipFile.complete.js" ></script>
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     </body>
 </html>
